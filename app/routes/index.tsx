@@ -89,10 +89,8 @@ function App() {
     const action = commandsActions.find((c) => c.command === normalized);
 
     setStack((prev) => {
-      // Clone stack
       const updated = [...prev];
 
-      // Remove last input line only
       const lastInputIndex = [...updated]
         .reverse()
         .findIndex((item) => item.type === "input");
@@ -100,22 +98,18 @@ function App() {
         updated.splice(updated.length - 1 - lastInputIndex, 1);
       }
 
-      // Add the entered command as output
       updated.push({ type: "output", text: command });
 
       if (action) {
-        // Temporarily update stack and return here — we'll append from action separately
         return updated;
       }
 
-      // Command not found fallback
       updated.push({
         type: "output",
         text: `Command not found: ${command}`,
         customStyle: "!text-red-500",
       });
 
-      // Always re-append a new input
       updated.push({
         type: "input",
         acceptValue: true,
