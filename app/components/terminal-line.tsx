@@ -33,6 +33,7 @@ const TerminalLine: FC<TerminalLineProps> = ({
               className="outline-0 bg-transparent text-white caret-transparent w-0"
               autoFocus
               value={inputValue}
+              ref={inpurRef}
               onChange={(e) => setInputValue(e.target.value)}
             />
             {inputValue}
