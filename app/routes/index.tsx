@@ -133,7 +133,7 @@ function App() {
   };
 
   return (
-    <div className="py-7 px-12">
+    <div className="py-7 lg:px-12 px-8">
       {stack.map((line, index) => (
         <TerminalLine
           key={index}
