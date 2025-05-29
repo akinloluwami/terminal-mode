@@ -113,6 +113,24 @@ function App() {
         ]);
       },
     },
+    {
+      command: "clear",
+      action: () => {
+        setStack([
+          {
+            id: crypto.randomUUID(),
+            type: "output",
+            text: "Welcome to the terminal!",
+          },
+          {
+            id: crypto.randomUUID(),
+            type: "input",
+            acceptValue: true,
+            onCommand: handleCommand,
+          },
+        ]);
+      },
+    },
   ];
 
   const handleCommand = (command: string) => {
@@ -165,7 +183,7 @@ function App() {
   };
 
   return (
-    <div className="py-7 lg:px-12 px-8">
+    <div className="py-7 lg:px-12 px-8 flex flex-col gap-2">
       {stack.map((line, index) => (
         <TerminalLine
           id={line.id}
