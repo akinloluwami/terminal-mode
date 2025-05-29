@@ -7,7 +7,6 @@ const TerminalLine: FC<TerminalLineProps> = ({
   text,
   onCommand,
   customStyle,
-  id,
   isLoading,
 }) => {
   const [inputValue, setInputValue] = useState("");
