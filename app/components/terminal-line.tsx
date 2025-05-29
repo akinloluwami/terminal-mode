@@ -1,11 +1,13 @@
 import type { TerminalLineProps } from "@/types";
 import { useRef, useState, type FC } from "react";
+import { PiSpinnerLight } from "react-icons/pi";
 
 const TerminalLine: FC<TerminalLineProps> = ({
   type,
   text,
   onCommand,
   customStyle,
+  id,
 }) => {
   const [inputValue, setInputValue] = useState("");
 
