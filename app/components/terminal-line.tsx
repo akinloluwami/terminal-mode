@@ -8,6 +8,7 @@ const TerminalLine: FC<TerminalLineProps> = ({
   onCommand,
   customStyle,
   id,
+  isLoading,
 }) => {
   const [inputValue, setInputValue] = useState("");
 
@@ -45,7 +46,10 @@ const TerminalLine: FC<TerminalLineProps> = ({
       )}
       {type === "output" && (
         <span className={`text-gray-500 ${customStyle ? customStyle : ""}`}>
-          $ {text}
+          $ {text}{" "}
+          {isLoading && (
+            <PiSpinnerLight className="inline animate-spin" size={20} />
+          )}
         </span>
       )}
     </div>
