@@ -10,14 +10,17 @@ export const Route = createFileRoute("/")({
 function App() {
   const [stack, setStack] = useState<TerminalLineProps[]>([
     {
+      id: "6c3e3556-30f2-4d9a-817d-9ac758f15ec5",
       type: "output",
       text: "Welcome to the terminal!",
     },
     {
+      id: "1f2cb41d-43e5-44b7-b3c8-d8a9dcbdcc31",
       type: "output",
       text: "run `ssh help` to see available commands",
     },
     {
+      id: "e32e8125-ae1d-4977-81be-dfcbdb0b97af",
       type: "input",
     },
   ]);
@@ -29,26 +32,34 @@ function App() {
         setStack((prev) => [
           ...prev,
           {
+            id: crypto.randomUUID(),
             type: "output",
             text: "ssh signup - Create a new account",
             customStyle: "!text-blue-400",
           },
           {
+            id: crypto.randomUUID(),
+
             type: "output",
             text: "ssh login - Log in to your account",
             customStyle: "!text-blue-400",
           },
           {
+            id: crypto.randomUUID(),
+
             type: "output",
             text: "ssh logout - Log out of your account",
             customStyle: "!text-blue-400",
           },
           {
+            id: crypto.randomUUID(),
+
             type: "output",
             text: "ssh status - Check the status of your account",
             customStyle: "!text-blue-400",
           },
           {
+            id: crypto.randomUUID(),
             type: "input",
           },
         ]);
@@ -60,17 +71,25 @@ function App() {
         setStack((prev) => [
           ...prev,
           {
+            id: crypto.randomUUID(),
             type: "output",
             text: "Enter your username:",
           },
           {
+            id: crypto.randomUUID(),
+
             type: "input",
             acceptValue: true,
             onCommand: (username) => {
               setStack((prev) => [
                 ...prev.filter((item) => item.type !== "input"),
-                { type: "output", text: `Username ${username} created!` },
                 {
+                  id: crypto.randomUUID(),
+                  type: "output",
+                  text: `Username ${username} created!`,
+                },
+                {
+                  id: crypto.randomUUID(),
                   type: "input",
                   acceptValue: true,
                   onCommand: handleCommand,
@@ -98,19 +117,25 @@ function App() {
         updated.splice(updated.length - 1 - lastInputIndex, 1);
       }
 
-      updated.push({ type: "output", text: command });
+      updated.push({
+        id: crypto.randomUUID(),
+        type: "output",
+        text: command,
+      });
 
       if (action) {
         return updated;
       }
 
       updated.push({
+        id: crypto.randomUUID(),
         type: "output",
         text: `Command not found: ${command}`,
         customStyle: "!text-red-500",
       });
 
       updated.push({
+        id: crypto.randomUUID(),
         type: "input",
         acceptValue: true,
         onCommand: handleCommand,
@@ -130,6 +155,7 @@ function App() {
     <div className="py-7 lg:px-12 px-8">
       {stack.map((line, index) => (
         <TerminalLine
+          id={line.id}
           key={index}
           type={line.type}
           text={line.text}
