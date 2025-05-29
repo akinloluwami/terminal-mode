@@ -119,7 +119,7 @@ const TerminalLine: FC<TerminalLineProps> = ({
               value={inputValue}
               ref={inputRef}
               onChange={(e) => {
-                setInputValue(e.target.value);
+                setInputValue(e.target.value.toLowerCase());
               }}
               onKeyUp={updateCaretPosition}
               onSelect={updateCaretPosition}
