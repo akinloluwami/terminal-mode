@@ -81,20 +81,33 @@ function App() {
             type: "input",
             acceptValue: true,
             onCommand: (username) => {
+              const pendingId = crypto.randomUUID();
               setStack((prev) => [
                 ...prev.filter((item) => item.type !== "input"),
                 {
-                  id: crypto.randomUUID(),
+                  id: pendingId,
                   type: "output",
-                  text: `Username ${username} created!`,
-                },
-                {
-                  id: crypto.randomUUID(),
-                  type: "input",
-                  acceptValue: true,
-                  onCommand: handleCommand,
+                  text: `Creating account for ${username}...`,
+                  isLoading: true,
                 },
               ]);
+              setTimeout(() => {
+                setStack((prev) => [
+                  ...prev.filter((item) => item.id !== pendingId),
+                  {
+                    id: crypto.randomUUID(),
+                    type: "output",
+                    text: `Account created successfully for ${username}!`,
+                    customStyle: "!text-green-500",
+                  },
+                  {
+                    id: crypto.randomUUID(),
+                    type: "input",
+                    acceptValue: true,
+                    onCommand: handleCommand,
+                  },
+                ]);
+              }, 2000);
             },
           },
         ]);
@@ -162,6 +175,7 @@ function App() {
           onCommand={line.acceptValue ? line.onCommand : handleCommand}
           customStyle={line.customStyle}
           acceptValue={line.acceptValue}
+          isLoading={line.isLoading}
         />
       ))}
     </div>
